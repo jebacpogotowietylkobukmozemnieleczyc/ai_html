@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Test przeglądarek</title>
+    <link rel="stylesheet" type="text/css" href="style2.css" title="Arkusz stylów CSS">
+    <script src="modernizr-custom.js"></script>
+    <script type="text/javascript">
+        window.onload = Loaded;
+        function Loaded()
+        {
+            Draw();
+            Check(Modernizr.geolocation, "geo");
+            Check(Modernizr.canvas, "can");
+            Check(Modernizr.video.ogg, "ogg");
+            Check(Modernizr.inputtypes.date, "dat");
+        }
+        function Check(func, id)
+        {
+            if (func) { AddImage("ok.jpg", id); }
+            else { AddImage("no.jpg", id) }
+        }
+        function AddImage(path, id)
+        {
+            var img = document.createElement("img");
+            img.setAttribute("src", path);
+            img.setAttribute("width", 24);
+            img.setAttribute("height", 24);
+            document.getElementById(id).appendChild(img);
+        }
+        function Draw()
+        {
+            var canvas = document.getElementById("c");
+            var c = canvas.getContext("2d");
+            var g = c.createLinearGradient(0, 0, 400, 400);
+            g.addColorStop(0, "yellow");
+            g.addColorStop(1, "green");
+            c.fillStyle = g;
+            c.fillRect(0, 0, 400, 400);
+        }
+    </script>
+</head>
+<body>
+<table>
+    <thead>
+    <tr><th>Funkcja</th><th>Obsługa</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>Geolokacja</td><td id="geo"></td></tr>
+    <tr><td>Canvas</td><td id="can"></td></tr>
+    <tr><td>Format ogg</td><td id="ogg"></td></tr>
+    <tr><td>Pole daty</td><td id="dat"></td></tr>
+    </tbody>
+</table>
+<form novalidate>
+<input name="pole" placeholder="Szukaj!">
+<input name="ocana" type="number" min="2" max="5" step="0.5" value="2">
+<input name="poprawka" type="range" min="2" max="5" step="0.5" value="2">
+<input name="termin" type="date" required>
+<input name="adres" type="email" autofocus>
+<input name="kolor" type="color">
+<input type="submit" value="Szukaj">
+</form>
+<canvas id="c" width="400" height="400"></canvas>
+<span class="klasa">Jakub</span>
+</body>
+</html>
